@@ -18,4 +18,3 @@
 (make-accessors '#.(swig-lispify-noprefix "dStopwatch"))
 (make-accessors '#.(swig-lispify-noprefix "dMass"))
 (make-accessors '#.(swig-lispify-noprefix "dGeomClass"))
-
