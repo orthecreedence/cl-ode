@@ -47,6 +47,7 @@
            package))))))
 
 
+
 ;;;SWIG wrapper code starts here
 
 (cl:defmacro defanonenum (&body enums)
@@ -94,6 +95,18 @@
 
 ;;;SWIG wrapper code ends here
 
+
+(cffi:defcfun ("dOdeError" #.(swig-lispify-noprefix "dOdeError" 'function)) :void
+  (arg0 :int)
+  (arg1 :string))
+
+(cffi:defcfun ("dOdeDebug" #.(swig-lispify-noprefix "dOdeDebug" 'function)) :void
+  (arg0 :int)
+  (arg1 :string))
+
+(cffi:defcfun ("dOdeMessage" #.(swig-lispify-noprefix "dOdeMessage" 'function)) :void
+  (arg0 :int)
+  (arg1 :string))
 
 (defanonenum 
 	(#.(swig-lispify-noprefix "d_ERR_UNKNOWN" 'enumvalue) #.0)
@@ -205,7 +218,7 @@
 (cffi:defcenum #.(swig-lispify-noprefix "dAllocateODEDataFlags" 'enumname)
 	(#.(swig-lispify-noprefix "dAllocateFlagBasicData" 'enumvalue :keyword) #.0)
 	(#.(swig-lispify-noprefix "dAllocateFlagCollisionData" 'enumvalue :keyword) #.#x00000001)
-	(#.(swig-lispify-noprefix "dAllocateMaskAll" 'enumvalue :keyword) #.~0))
+	(#.(swig-lispify-noprefix "dAllocateMaskAll" 'enumvalue :keyword) #.-1))
 
 (cffi:defcfun ("dAllocateODEDataForThread" #.(swig-lispify-noprefix "dAllocateODEDataForThread" 'function)) :int
   (uiAllocateFlags :unsigned-int))
@@ -273,17 +286,17 @@
 
 (cffi:defcfun ("dGetMessageHandler" #.(swig-lispify-noprefix "dGetMessageHandler" 'function)) :pointer)
 
-(cffi:defcfun ("dError" #.(swig-lispify-noprefix "dError" 'function)) :void
+(cffi:defcfun ("dOdeError" #.(swig-lispify-noprefix "dOdeError" 'function)) :void
   (num :int)
   (msg :string)
   &rest)
 
-(cffi:defcfun ("dDebug" #.(swig-lispify-noprefix "dDebug" 'function)) :void
+(cffi:defcfun ("dOdeDebug" #.(swig-lispify-noprefix "dOdeDebug" 'function)) :void
   (num :int)
   (msg :string)
   &rest)
 
-(cffi:defcfun ("dMessage" #.(swig-lispify-noprefix "dMessage" 'function)) :void
+(cffi:defcfun ("dOdeMessage" #.(swig-lispify-noprefix "dOdeMessage" 'function)) :void
   (num :int)
   (msg :string)
   &rest)
@@ -2248,11 +2261,11 @@
 	#.(swig-lispify-noprefix "dTriMeshClass" 'enumvalue)
 	#.(swig-lispify-noprefix "dHeightfieldClass" 'enumvalue)
 	#.(swig-lispify-noprefix "dFirstSpaceClass" 'enumvalue)
-	(#.(swig-lispify-noprefix "dSimpleSpaceClass" 'enumvalue) #.dFirstSpaceCass)
+	(#.(swig-lispify-noprefix "dSimpleSpaceClass" 'enumvalue) #.(swig-lispify-noprefix "dFirstSpaceClass" 'enumvalue))
 	#.(swig-lispify-noprefix "dHashSpaceClass" 'enumvalue)
 	#.(swig-lispify-noprefix "dSweepAndPruneSpaceClass" 'enumvalue)
 	#.(swig-lispify-noprefix "dQuadTreeSpaceClass" 'enumvalue)
-	(#.(swig-lispify-noprefix "dLastSpaceClass" 'enumvalue) #.dQadTreeSpaceCass)
+	(#.(swig-lispify-noprefix "dLastSpaceClass" 'enumvalue) #.(swig-lispify-noprefix "dQadTreeSpaceCass" 'enumvalue))
 	#.(swig-lispify-noprefix "dFirstUserClass" 'enumvalue)
 	(#.(swig-lispify-noprefix "dLastUserClass" 'enumvalue) #.(cl:+ dFirstserCass (cl:- dMaxserCasses 1)))
 	#.(swig-lispify-noprefix "dGeomNumClasses" 'enumvalue))

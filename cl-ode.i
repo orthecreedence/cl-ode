@@ -43,7 +43,17 @@
             fix
             (cl:nreverse (helper (cl:concatenate 'cl:list (strip-prefix "d" name)) cl:nil cl:nil))
             fix)
-           package))))))%}
+           package))))))
+%}
+
+%rename(dOdeError) dError;
+extern void dError(int, const char *);
+
+%rename(dOdeDebug) dDebug;
+extern void dDebug(int, const char *);
+
+%rename(dOdeMessage) dMessage;
+extern void dMessage(int, const char *);
 
 %include "tmp/include/odeconfig.h"
 %include "tmp/include/compatibility.h"
