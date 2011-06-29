@@ -5,7 +5,7 @@
 (in-package :cl-ode)
 
 (define-foreign-library ode
-  (:unix (:or "libode.so" "libode.dylib"))
+  (:unix (:or "libode.so" "/usr/local/lib/libode.so" "libode.dylib"))
   (:windows "ode.dll")
   (t (:default "ode")))
 

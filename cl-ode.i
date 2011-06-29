@@ -7,7 +7,7 @@
 
 (cl:eval-when (:compile-toplevel :load-toplevel)
   (cl:unless (cl:fboundp 'swig-lispify-noprefix)
-    (cl:defun chipmunk-lispify (name flag cl:&optional (package cl:*package*))
+    (cl:defun swig-lispify-noprefix (name flag cl:&optional (package cl:*package*))
       (cl:labels ((helper (lst last rest cl:&aux (c (cl:car lst)))
                     (cl:cond
                       ((cl:null lst)
