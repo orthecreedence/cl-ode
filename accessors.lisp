@@ -1,4 +1,4 @@
-(in-package :cl-ode.bindings)
+(in-package :cl-ode)
 
 (defmacro make-accessors (c-struct)
   `(progn
@@ -11,10 +11,11 @@
 		       `(export ',accessor-name)))))
 
 
-(make-accessors '#.(chipmunk-lispify dJointFeedback 'classname)
-(make-accessors '#.(chipmunk-lispify dSurfaceParameters 'classname)
-(make-accessors '#.(chipmunk-lispify dContactGeom 'classname)
-(make-accessors '#.(chipmunk-lispify dContact 'classname)
-(make-accessors '#.(chipmunk-lispify dStopwatch 'classname)
-(make-accessors '#.(chipmunk-lispify dMass 'classname)
-(make-accessors '#.(chipmunk-lispify dGeomClass 'classname)
+(make-accessors '#.(swig-lispify-noprefix "dJointFeedback"))
+(make-accessors '#.(swig-lispify-noprefix "dSurfaceParameters"))
+(make-accessors '#.(swig-lispify-noprefix "dContactGeom"))
+(make-accessors '#.(swig-lispify-noprefix "dContact"))
+(make-accessors '#.(swig-lispify-noprefix "dStopwatch"))
+(make-accessors '#.(swig-lispify-noprefix "dMass"))
+(make-accessors '#.(swig-lispify-noprefix "dGeomClass"))
+

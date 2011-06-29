@@ -1,4 +1,4 @@
-(in-package :cl-ode.bindings)
+(in-package :cl-ode)
 
 (cl:export '#.(swig-lispify-noprefix "dJointFeedback" 'classname))
 (cl:export '#.(swig-lispify-noprefix "dSurfaceParameters" 'classname))

@@ -7,8 +7,8 @@ echo "done."
 # done, now generate the exports.lisp file
 echo -n "Now creating exported struct/function list in exports.lisp..."
 
-echo "(in-package :cl-ode.bindings)" > exports.lisp
-echo "(in-package :cl-ode.bindings)
+echo "(in-package :cl-ode)" > exports.lisp
+echo "(in-package :cl-ode)
 
 (defmacro make-accessors (c-struct)
   \`(progn
@@ -23,7 +23,7 @@ echo "(in-package :cl-ode.bindings)
 " > accessors.lisp
 echo >> exports.lisp
 for STRUCT in `cat bindings.lisp | grep "defcstruct" | sed "s|.*\"\([^\"]\+\)\".*|\1|g"`; do
-    echo "(make-accessors '#.(chipmunk-lispify "$STRUCT" 'classname)" >> accessors.lisp
+    echo "(make-accessors '#.(swig-lispify-noprefix \"$STRUCT\"))" >> accessors.lisp
     echo "(cl:export '#.(swig-lispify-noprefix \"$STRUCT\" 'classname))" >> exports.lisp
 done
 echo >> exports.lisp

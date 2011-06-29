@@ -3,7 +3,7 @@
 %feature("intern_function", "swig-lispify-noprefix");
 
 %insert("lisphead") %{
-(in-package :cl-ode.bindings)
+(in-package :cl-ode)
 
 (cl:eval-when (:compile-toplevel :load-toplevel)
   (cl:unless (cl:fboundp 'swig-lispify-noprefix)

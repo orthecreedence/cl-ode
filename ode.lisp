@@ -1,7 +1,4 @@
 (defpackage #:cl-ode
-  (:use :cl :cffi))
-
-(defpackage #:cl-ode.bindings
   (:use :cl :cffi)
   (:nicknames :ode))
 

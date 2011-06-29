@@ -4,7 +4,7 @@
 ;;; Do not make changes to this file unless you know what you are doing--modify
 ;;; the SWIG interface file instead.
 
-(in-package :cl-ode.bindings)
+(in-package :cl-ode)
 
 (cl:eval-when (:compile-toplevel :load-toplevel)
   (cl:unless (cl:fboundp 'swig-lispify-noprefix)
