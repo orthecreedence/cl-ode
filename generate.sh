@@ -59,11 +59,20 @@ echo "done."
 
 # create the actual swig bindings.
 echo -n "Creating ODE bindings in bindings.lisp..."
+
+# fix enums
+patch -p0 tmp/include/collision.h < collision.h.patch > /dev/null
+
 swig -cffi cl-ode.i > /dev/null
 
 # fix some swig problems in bindings
 sed -i 's|dFirstSpaceCass|dFirstSpaceClass|' bindings.lisp
+sed -i 's|dQadTreeSpaceCass|dQuadTreeSpaceClass|' bindings.lisp
+sed -i 's|dMaxserCasses|dMaxUserClasses|' bindings.lisp
+sed -i 's|dFirstserCass|dFirstUserClass|' bindings.lisp
 sed -i "s|#.\(d[a-z]\+\)|#.(swig-lispify-noprefix \"\1\" 'enumvalue)|i" bindings.lisp
+sed -i "s|\s\(d[A-Z][A-Za-z]\+\)| #.(swig-lispify-noprefix \"\1\" 'enumvalue)|g" bindings.lisp
+
 echo "done."
 
 # done, now generate the exports.lisp file
@@ -82,7 +91,7 @@ echo "(in-package :cl-ode)
   \`(progn
      ,@(loop for slot-name in (foreign-slot-names c-struct)
 	  for accessor-name = (intern (concatenate 'string (symbol-name c-struct)
-						   "-"
+						   \"-\"
 						   (symbol-name slot-name)))
 	  append (list \`(defmacro ,accessor-name (ptr)
 			  (list 'foreign-slot-value ptr '',c-struct '',slot-name))
@@ -92,7 +101,7 @@ echo "(in-package :cl-ode)
 
 # create structure (or classname) exports/accessors
 for STRUCT in `cat bindings.lisp | grep "defcstruct" | sed "s|.*\"\([^\"]\+\)\".*|\1|g"`; do
-    echo "(make-accessors '#.(swig-lispify-noprefix \"$STRUCT\"))" >> accessors.lisp
+    echo "(make-accessors #.(swig-lispify-noprefix \"$STRUCT\" 'classname))" >> accessors.lisp
     echo "(cl:export '#.(swig-lispify-noprefix \"$STRUCT\" 'classname))" >> exports.lisp
 done
 
@@ -107,7 +116,7 @@ echo "done."
 # -------------------------------------
 
 echo "Removing temp files."
-#rm -rf tmp/
+rm -rf tmp/
 
 echo "Finished."
 
