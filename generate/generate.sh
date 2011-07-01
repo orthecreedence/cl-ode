@@ -23,6 +23,13 @@
 
 PREFIX=$1
 
+if [ "`dirname $0`" == "." ]; then
+    echo "Please run this script from the main directory (ie ./generate/generate.sh) instead of in the "generate" folder."
+    exit 1
+fi
+
+GENDIR=`dirname $0`
+
 # get default prefix if not specified
 if [ "$PREFIX" == "" ]; then
 	echo
@@ -48,10 +55,10 @@ fi
 # odemath.h file has an __inline directive in two functions that swig doesn't take too kindly
 # to.
 echo -n "Creating local version of ODE headers to do some necessary text replacements..."
-mkdir -p tmp/include
-cp -R $PREFIX/include/ode/* tmp/include
-sed -i 's|__inline\s*||g' tmp/include/odemath.h
-sed -i 's|dAllocateMaskAll\s*=\s*~0U|dAllocateMaskAll = -1|' tmp/include/odeinit.h
+mkdir -p $GENDIR/tmp/include
+cp -R $PREFIX/include/ode/* $GENDIR/tmp/include
+sed -i 's|__inline\s*||g' $GENDIR/tmp/include/odemath.h
+sed -i 's|dAllocateMaskAll\s*=\s*~0U|dAllocateMaskAll = -1|' $GENDIR/tmp/include/odeinit.h
 echo "done."
 
 # binding generation
@@ -61,9 +68,10 @@ echo "done."
 echo -n "Creating ODE bindings in bindings.lisp..."
 
 # fix enums
-patch -p0 tmp/include/collision.h < collision.h.patch > /dev/null
+patch -p0 $GENDIR/tmp/include/collision.h < $GENDIR/collision.h.patch > /dev/null
 
-swig -cffi cl-ode.i > /dev/null
+swig -cffi $GENDIR/cl-ode.i > /dev/null
+mv $GENDIR/bindings.lisp .
 
 # fix some swig problems in bindings
 sed -i 's|dFirstSpaceCass|dFirstSpaceClass|' bindings.lisp
@@ -116,7 +124,7 @@ echo "done."
 # -------------------------------------
 
 echo "Removing temp files."
-rm -rf tmp/
+rm -rf $GENDIR/tmp/
 
 echo "Finished."
 
