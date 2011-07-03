@@ -80,6 +80,7 @@ sed -i 's|dMaxserCasses|dMaxUserClasses|' bindings.lisp
 sed -i 's|dFirstserCass|dFirstUserClass|' bindings.lisp
 sed -i "s|#.\(d[a-z]\+\)|#.(swig-lispify-noprefix \"\1\" 'enumvalue)|i" bindings.lisp
 sed -i "s|\s\(d[A-Z][A-Za-z]\+\)| #.(swig-lispify-noprefix \"\1\" 'enumvalue)|g" bindings.lisp
+#sed -i "s|(cffi:defcenum.*\"dJointType\" 'enumname.*|(defanonenum|" bindings.lisp
 
 echo "done."
 
@@ -120,6 +121,11 @@ done
 echo >> exports.lisp
 TMPIFS=$IFS
 IFS=$'\n'		# loop over lines, not words
+#for ENUM in `cat bindings.lisp | egrep 'dJointType[A-Z]' | sed "s|.*\(#\.([^)]\+)\).*|'\1|" | sed "s|\s*:keyword||"`; do
+#	echo "(cl:export $ENUM)" >> exports.lisp
+#done
+echo "(cl:export '#.(swig-lispify-noprefix \"dJointType\" 'enumname))" >> exports.lisp
+echo >> exports.lisp
 for ENUM in `cat bindings.lisp | egrep 'dContact[A-Z].*enumval' | sed "s|.*\(#\.([^)]\+)\).*|'\1|"`; do
 	echo "(cl:export $ENUM)" >> exports.lisp
 done

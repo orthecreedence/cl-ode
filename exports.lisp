@@ -11,6 +11,8 @@
 (cl:export '#.(swig-lispify-noprefix "dMass" 'classname))
 (cl:export '#.(swig-lispify-noprefix "dGeomClass" 'classname))
 
+(cl:export '#.(swig-lispify-noprefix "dJointType" 'enumname))
+
 (cl:export '#.(swig-lispify-noprefix "dContactMu2" 'enumvalue))
 (cl:export '#.(swig-lispify-noprefix "dContactFDir1" 'enumvalue))
 (cl:export '#.(swig-lispify-noprefix "dContactBounce" 'enumvalue))
