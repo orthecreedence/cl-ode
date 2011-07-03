@@ -116,15 +116,14 @@ for STRUCT in `cat bindings.lisp | grep "defcstruct" | sed "s|.*\"\([^\"]\+\)\".
     echo "(cl:export '#.(swig-lispify-noprefix \"$STRUCT\" 'classname))" >> exports.lisp
 done
 
-# actually, disabled because exporting enum types is throwing errors. oh well.
 # export useful enums
-#echo >> exports.lisp
-#TMPIFS=$IFS
-#IFS=$'\n'		# loop over lines, not words
-#for ENUM in `cat bindings.lisp | egrep 'dJointType[A-Z]' | sed "s|.*\(#\.([^)]\+)\).*|\1|"`; do
-#	echo "(cl:export $ENUM)" >> exports.lisp
-#done
-#IFS=$TMPIFS
+echo >> exports.lisp
+TMPIFS=$IFS
+IFS=$'\n'		# loop over lines, not words
+for ENUM in `cat bindings.lisp | egrep 'dContact[A-Z].*enumval' | sed "s|.*\(#\.([^)]\+)\).*|'\1|"`; do
+	echo "(cl:export $ENUM)" >> exports.lisp
+done
+IFS=$TMPIFS
 
 # create function binding exports
 echo >> exports.lisp
