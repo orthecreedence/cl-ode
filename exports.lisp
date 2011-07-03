@@ -1,5 +1,8 @@
 (in-package :cl-ode)
 
+(cl:export 'swig-lispify-noprefix)
+
+
 (cl:export '#.(swig-lispify-noprefix "dJointFeedback" 'classname))
 (cl:export '#.(swig-lispify-noprefix "dSurfaceParameters" 'classname))
 (cl:export '#.(swig-lispify-noprefix "dContactGeom" 'classname))

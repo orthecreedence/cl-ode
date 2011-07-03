@@ -1,6 +1,10 @@
 (defpackage #:cl-ode
-  (:use :cl :cffi)
-  (:nicknames :ode))
+  (:use #:cl #:cffi)
+  (:nicknames #:ode))
+
+(defpackage #:cl-ode.accessors
+  (:use #:cl #:cffi #:cl-ode)
+  (:nicknames #:ode.a))
 
 (in-package :cl-ode)
 

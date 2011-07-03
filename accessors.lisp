@@ -1,4 +1,4 @@
-(in-package :cl-ode)
+(in-package :cl-ode.accessors)
 
 (defmacro make-accessors (c-struct)
   `(progn
