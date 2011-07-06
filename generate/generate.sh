@@ -126,6 +126,10 @@ IFS=$'\n'		# loop over lines, not words
 #done
 echo "(cl:export '#.(swig-lispify-noprefix \"dJointType\" 'enumname))" >> exports.lisp
 echo >> exports.lisp
+for ENUM in `cat bindings.lisp | egrep 'dParam.*enumvalue\)' | sed "s|.*\(#\.([^)]\+)\).*|'\1|"`; do
+	echo "(cl:export $ENUM)" >> exports.lisp
+done
+echo >> exports.lisp
 for ENUM in `cat bindings.lisp | egrep 'dContact[A-Z].*enumval' | sed "s|.*\(#\.([^)]\+)\).*|'\1|"`; do
 	echo "(cl:export $ENUM)" >> exports.lisp
 done
