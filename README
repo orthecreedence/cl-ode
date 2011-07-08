@@ -32,7 +32,7 @@ Usage:
 
 Done. The files currently checked in were generated for ODE 0.11.1. If you want
 to generate for a different version, you will most likely have to run the above
-script. If using 0.11.1, you can most likely use the included files without
+script. If using 0.11.1, you can probably just use the included files without
 regenerting.
 
 This has been testing on Slackware 64-bit in clisp, SBCL, and Clozure CL and 
