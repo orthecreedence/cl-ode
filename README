@@ -27,7 +27,7 @@ notice more missing pieces.
 
 To generate bindings:
 	git clone ...
-    cd cl-ode/
+	cd cl-ode/
 	./generate/generate.sh [/ode/install/prefix]
 
 To install:
