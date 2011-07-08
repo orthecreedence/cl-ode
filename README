@@ -45,6 +45,9 @@ Windows 64-bit in Clozure CL, all with ODE 0.11.1 compiled for x86_64.
 If you have any problems, feel free to let me know, or better yet, if you come
 up with improvements, I can add you to the github project.
 
+Special thanks to Ralith on github for his work on the chipmunk bindings, a lot
+of which inspired the way I organize and generate the cl-ode bindings.
+
 Thanks for using!
 
 Andrew Lyon
