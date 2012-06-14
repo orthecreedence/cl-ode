@@ -38,9 +38,10 @@ if [ "$PREFIX" == "" ]; then
 fi
 
 if [ "$INFINITY" == "" ]; then
-	echo "NOTE: Common Lisp infinity value not passed as second value. Defaulting to 1E++0"
-	INFINITY=1E++0
+	echo "NOTE: Infinity precision not passed as second value. Defaulting to :single (as opposed to :double)"
+	INFINITY=
 fi
+INFINITY="\(infinity $INFINITY\)"
 
 # verify the prefix
 if [ ! -d $PREFIX/include/ode ]; then
