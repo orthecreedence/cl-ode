@@ -1,3 +1,7 @@
+UPDATE: I'm currently working on binding generation for ODE 0.12, stay tuned
+for updates. The 0.12 branch of this project exists, but isn't working yet.
+
+	
 This is a Common Lisp CFFI wrapper for ODE (Open Dynamics Engine) created by
 Swig and some clever scripting. I'm getting into game programming and needed
 a physics engine to start with. Bullet is very attractive, but the C API is
