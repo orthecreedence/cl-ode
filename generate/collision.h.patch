@@ -1,0 +1,42 @@
+765,773c765,773
+<   dBoxClass,
+<   dCapsuleClass,
+<   dCylinderClass,
+<   dPlaneClass,
+<   dRayClass,
+<   dConvexClass,
+<   dGeomTransformClass,
+<   dTriMeshClass,
+<   dHeightfieldClass,
+---
+>   dBoxClass = 1,
+>   dCapsuleClass = 2,
+>   dCylinderClass = 3,
+>   dPlaneClass = 4,
+>   dRayClass = 5,
+>   dConvexClass = 6,
+>   dGeomTransformClass = 7,
+>   dTriMeshClass = 8,
+>   dHeightfieldClass = 9,
+775,780c775,780
+<   dFirstSpaceClass,
+<   dSimpleSpaceClass = dFirstSpaceClass,
+<   dHashSpaceClass,
+<   dSweepAndPruneSpaceClass, // SAP
+<   dQuadTreeSpaceClass,
+<   dLastSpaceClass = dQuadTreeSpaceClass,
+---
+>   dFirstSpaceClass = 10,
+>   dSimpleSpaceClass = 10,
+>   dHashSpaceClass = 11,
+>   dSweepAndPruneSpaceClass = 12, // SAP
+>   dQuadTreeSpaceClass = 13,
+>   dLastSpaceClass = 13,
+782,784c782,784
+<   dFirstUserClass,
+<   dLastUserClass = dFirstUserClass + dMaxUserClasses - 1,
+<   dGeomNumClasses
+---
+>   dFirstUserClass = 14,
+>   dLastUserClass = 17,
+>   dGeomNumClasses = 18

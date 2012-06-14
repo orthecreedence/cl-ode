@@ -108,7 +108,7 @@
   (arg0 :int)
   (arg1 :string))
 
-(cl:defconstant #.(swig-lispify-noprefix "dInfinity" 'constant) (cl:/ 1.0d0 0.0d0))
+(cl:defconstant #.(swig-lispify-noprefix "dInfinity" 'constant) 1E++0)
 
 (cl:defconstant #.(swig-lispify-noprefix "dSINGLE" 'constant) 1)
 
@@ -118,7 +118,7 @@
 	#.(swig-lispify-noprefix "d_ERR_UASSERT" 'enumvalue)
 	#.(swig-lispify-noprefix "d_ERR_LCP" 'enumvalue))
 
-(defanonenum
+(cffi:defcenum #.(swig-lispify-noprefix "dJointType" 'enumname)
 	(#.(swig-lispify-noprefix "dJointTypeNone" 'enumvalue :keyword) #.0)
 	#.(swig-lispify-noprefix "dJointTypeBall" 'enumvalue :keyword)
 	#.(swig-lispify-noprefix "dJointTypeHinge" 'enumvalue :keyword)
@@ -2728,24 +2728,24 @@
 
 (defanonenum 
 	(#.(swig-lispify-noprefix "dSphereClass" 'enumvalue) #.0)
-	#.(swig-lispify-noprefix "dBoxClass" 'enumvalue)
-	#.(swig-lispify-noprefix "dCapsuleClass" 'enumvalue)
-	#.(swig-lispify-noprefix "dCylinderClass" 'enumvalue)
-	#.(swig-lispify-noprefix "dPlaneClass" 'enumvalue)
-	#.(swig-lispify-noprefix "dRayClass" 'enumvalue)
-	#.(swig-lispify-noprefix "dConvexClass" 'enumvalue)
-	#.(swig-lispify-noprefix "dGeomTransformClass" 'enumvalue)
-	#.(swig-lispify-noprefix "dTriMeshClass" 'enumvalue)
-	#.(swig-lispify-noprefix "dHeightfieldClass" 'enumvalue)
-	#.(swig-lispify-noprefix "dFirstSpaceClass" 'enumvalue)
-	(#.(swig-lispify-noprefix "dSimpleSpaceClass" 'enumvalue) #.(swig-lispify-noprefix "dFirstSpaceClass" 'enumvalue))
-	#.(swig-lispify-noprefix "dHashSpaceClass" 'enumvalue)
-	#.(swig-lispify-noprefix "dSweepAndPruneSpaceClass" 'enumvalue)
-	#.(swig-lispify-noprefix "dQuadTreeSpaceClass" 'enumvalue)
-	(#.(swig-lispify-noprefix "dLastSpaceClass" 'enumvalue) #.(swig-lispify-noprefix "dQadTreeSpaceClass" 'enumvalue))
-	#.(swig-lispify-noprefix "dFirstUserClass" 'enumvalue)
-	(#.(swig-lispify-noprefix "dLastUserClass" 'enumvalue) #.(cl:+ #.(swig-lispify-noprefix "dFirstserClass" 'enumvalue) (cl:- #.(swig-lispify-noprefix "dMaxserCasses" 'enumvalue) 1)))
-	#.(swig-lispify-noprefix "dGeomNumClasses" 'enumvalue))
+	(#.(swig-lispify-noprefix "dBoxClass" 'enumvalue) #.1)
+	(#.(swig-lispify-noprefix "dCapsuleClass" 'enumvalue) #.2)
+	(#.(swig-lispify-noprefix "dCylinderClass" 'enumvalue) #.3)
+	(#.(swig-lispify-noprefix "dPlaneClass" 'enumvalue) #.4)
+	(#.(swig-lispify-noprefix "dRayClass" 'enumvalue) #.5)
+	(#.(swig-lispify-noprefix "dConvexClass" 'enumvalue) #.6)
+	(#.(swig-lispify-noprefix "dGeomTransformClass" 'enumvalue) #.7)
+	(#.(swig-lispify-noprefix "dTriMeshClass" 'enumvalue) #.8)
+	(#.(swig-lispify-noprefix "dHeightfieldClass" 'enumvalue) #.9)
+	(#.(swig-lispify-noprefix "dFirstSpaceClass" 'enumvalue) #.10)
+	(#.(swig-lispify-noprefix "dSimpleSpaceClass" 'enumvalue) #.10)
+	(#.(swig-lispify-noprefix "dHashSpaceClass" 'enumvalue) #.11)
+	(#.(swig-lispify-noprefix "dSweepAndPruneSpaceClass" 'enumvalue) #.12)
+	(#.(swig-lispify-noprefix "dQuadTreeSpaceClass" 'enumvalue) #.13)
+	(#.(swig-lispify-noprefix "dLastSpaceClass" 'enumvalue) #.13)
+	(#.(swig-lispify-noprefix "dFirstUserClass" 'enumvalue) #.14)
+	(#.(swig-lispify-noprefix "dLastUserClass" 'enumvalue) #.17)
+	(#.(swig-lispify-noprefix "dGeomNumClasses" 'enumvalue) #.18))
 
 (cffi:defcfun ("dCreateSphere" #.(swig-lispify-noprefix "dCreateSphere" 'function)) :pointer
   (space :pointer)
