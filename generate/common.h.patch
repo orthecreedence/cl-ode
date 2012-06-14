@@ -1,0 +1,8 @@
+22a23,24
+> #define dSINGLE 1
+> 
+34c36,37
+< #define PURE_INLINE static __inline
+---
+> // define PURE_INLINE static __inline
+> #define PURE_INLINE 
