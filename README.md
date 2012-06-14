@@ -14,20 +14,26 @@ I made it easy for people with POSIX-type systems (unix, linux, cygwin, etc) to 
 the bindings for themselves:
 
     cd /path/to/cl-ode
-    ./generate/generate [/path/to/ode-install [infinity-value]]
+    ./generate/generate [/path/to/ode-install [infinity precision]]
 
-The ODE install path defaults to /usr/local/ode, and the infinity value defaults to 1E++0
-(I mainly use Clozure CL).
+The ODE install path defaults to /usr/local/ode, and the infinity precision defaults to
+:single (other possible value is :double). See below for infinity notes.
 
 ## Cross implementation notes
-There is one horrible caveat. Common Lisp does not have a standard value for "infinity"
-which is part of ODE. What this means is it's nearly impossible to come up with a cross-
+There is one caveat. Common Lisp does not have a standard value for "infinity" which is
+part of ODE. What this means is it's nearly impossible to come up with a cross-
 implementation way of representing the infinity value while mapping it to the ODE internals
-portably. 
+portably.
 
 What's more is ODE can be compiled with single or double precision, making the infinity value
 yet even more complicated.
 
-If you need to use the infinity value in ODE, I suggest you compile with -DINFINITY=[value]
-and then regenerate the bindings as noted above, using the same infinity value for your 
-bindings as compiled with ODE.
+So while the bindings let you specify whether you use :single or :double precision, it doesn't
+mean your implementation will play nicely with ODE via CFFI. For instance, the Clozure CL
+single float infinity value 1E++0 maps *exactly* to (float)(1.0 / 0.0) in C. In SBCL, sending
+sb-ext:single-float-positive-infinity to a C function results in a divide by zero. Not sure
+if there is a way around this, I don't use SBCL much.
+
+The best solution, if you even *need* infinity,  is probably for you to compile ODE with 
+-DINFINITY=[your val] and update the "infinity" function in bindings.lisp to return this
+value.
