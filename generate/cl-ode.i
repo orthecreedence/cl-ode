@@ -70,8 +70,8 @@ extern void dMessage(int, const char *);
 %include "tmp/include/misc.h"
 %include "tmp/include/objects.h"
 %include "tmp/include/collision_space.h"
+%include "tmp/include/collision_trimesh.h"
 %include "tmp/include/collision.h"
 %include "tmp/include/export-dif.h"
-
-
+%include "tmp/include/objects.h"
 

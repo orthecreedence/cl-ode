@@ -17,4 +17,6 @@
 (make-accessors #.(swig-lispify-noprefix "dContact" 'classname))
 (make-accessors #.(swig-lispify-noprefix "dStopwatch" 'classname))
 (make-accessors #.(swig-lispify-noprefix "dMass" 'classname))
+(make-accessors #.(swig-lispify-noprefix "dWorldStepReserveInfo" 'classname))
+(make-accessors #.(swig-lispify-noprefix "dWorldStepMemoryFunctionsInfo" 'classname))
 (make-accessors #.(swig-lispify-noprefix "dGeomClass" 'classname))

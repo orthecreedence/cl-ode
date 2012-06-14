@@ -57,8 +57,8 @@ fi
 echo -n "Creating local version of ODE headers to do some necessary text replacements..."
 mkdir -p $GENDIR/tmp/include
 cp -R $PREFIX/include/ode/* $GENDIR/tmp/include
-sed -i 's|__inline\s*||g' $GENDIR/tmp/include/odemath.h
-sed -i 's|dAllocateMaskAll\s*=\s*~0U|dAllocateMaskAll = -1|' $GENDIR/tmp/include/odeinit.h
+patch -p0 $GENDIR/tmp/include/odeinit.h < $GENDIR/odeinit.h.patch > /dev/null
+patch -p0 $GENDIR/tmp/include/common.h < $GENDIR/common.h.patch > /dev/null
 echo "done."
 
 # binding generation
@@ -68,19 +68,17 @@ echo "done."
 echo -n "Creating ODE bindings in bindings.lisp..."
 
 # fix enums
-patch -p0 $GENDIR/tmp/include/collision.h < $GENDIR/collision.h.patch > /dev/null
+#patch -p0 $GENDIR/tmp/include/collision.h < $GENDIR/collision.h.patch > /dev/null
 
 swig -cffi $GENDIR/cl-ode.i > /dev/null
 mv $GENDIR/bindings.lisp .
 
 # fix some swig problems in bindings
-sed -i 's|dFirstSpaceCass|dFirstSpaceClass|' bindings.lisp
-sed -i 's|dQadTreeSpaceCass|dQuadTreeSpaceClass|' bindings.lisp
-sed -i 's|dMaxserCasses|dMaxUserClasses|' bindings.lisp
-sed -i 's|dFirstserCass|dFirstUserClass|' bindings.lisp
+sed -i 's|Cass|Class|' bindings.lisp
 sed -i "s|#.\(d[a-z]\+\)|#.(swig-lispify-noprefix \"\1\" 'enumvalue)|i" bindings.lisp
 sed -i "s|\s\(d[A-Z][A-Za-z]\+\)| #.(swig-lispify-noprefix \"\1\" 'enumvalue)|g" bindings.lisp
-#sed -i "s|(cffi:defcenum.*\"dJointType\" 'enumname.*|(defanonenum|" bindings.lisp
+sed -i "s|\#\.\~0|#.-1|" bindings.lisp		# fixed this in odeinit.h.patch, but for some reason swig ignores it.
+sed -i "s|(cffi:defcenum.*\"dJointType\" 'enumname.*|(defanonenum|" bindings.lisp
 
 echo "done."
 
