@@ -44,6 +44,29 @@
             (cl:nreverse (helper (cl:concatenate 'cl:list (strip-prefix "d" name)) cl:nil cl:nil))
             fix)
            package))))))
+
+(defun infinity (&optional (precision :single))
+  (if (eql precision :single)
+      (progn
+        #+sbcl sb-ext:single-float-positive-infinity
+        #+clozure 1S++0
+        #+abcl ext:single-float-positive-infinity
+        #+allegro excl::*infinity-single*
+        #+cmu ext:single-float-positive-infinity
+        #+(and ecl (not infinity-not-available)) si:single-float-positive-infinity
+        #+lispworks (coerce infinity$$ 'single-float)
+        #+scl ext:single-float-positive-infinity
+        #+t most-positive-single-float)
+      (progn
+        #+sbcl sb-ext:double-float-positive-infinity
+        #+clozure 1D++0
+        #+abcl ext:double-float-positive-infinity
+        #+allegro excl::*infinity-double*
+        #+cmu ext:double-float-positive-infinity
+        #+(and ecl (not infinity-not-available)) si:double-float-positive-infinity
+        #+lispworks #.(read-from-string "10E999")
+        #+scl ext:double-float-positive-infinity
+        #+t most-positive-double-float)))
 %}
 
 %rename(dOdeError) dError;
@@ -70,8 +93,8 @@ extern void dMessage(int, const char *);
 %include "tmp/include/misc.h"
 %include "tmp/include/objects.h"
 %include "tmp/include/collision_space.h"
+%include "tmp/include/collision_trimesh.h"
 %include "tmp/include/collision.h"
 %include "tmp/include/export-dif.h"
-
-
+%include "tmp/include/objects.h"
 
