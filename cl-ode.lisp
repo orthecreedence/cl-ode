@@ -4,13 +4,13 @@
 
 (defpackage #:cl-ode.accessors
   (:use #:cl #:cffi #:cl-ode)
-  (:nicknames #:ode.a))
+  (:nicknames #:ode-a))
 
 (in-package :cl-ode)
 
 (define-foreign-library ode
   (:unix (:or "libode.so" "/usr/local/lib/libode.so" "libode.dylib"))
-  (:windows "ode.dll")
+  (:windows (:or "ode.dll"))
   (t (:default "ode")))
 
 (use-foreign-library ode)
